@@ -2,6 +2,7 @@ package com.mostafiz.loginregister;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -55,6 +56,10 @@ public class UploadimageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
+
+//---------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------------
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -126,13 +131,7 @@ public class UploadimageActivity extends AppCompatActivity {
 
         }
     });
-
-
-
-
-
-
-        }
+    }
 
 
     private void stringRequest(String image,String email) {

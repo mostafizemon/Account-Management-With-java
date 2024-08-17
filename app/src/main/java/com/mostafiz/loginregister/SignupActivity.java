@@ -1,6 +1,7 @@
 package com.mostafiz.loginregister;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -29,12 +30,15 @@ public class SignupActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivitySignupBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
         setContentView(view);
+
+
 
 
         binding.signupactivityLogin.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +94,11 @@ public class SignupActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 if (response.equals("success")){
+
+                    SharedPreferences sharedPreferences=getSharedPreferences("information",MODE_PRIVATE);
+                    SharedPreferences.Editor edit=sharedPreferences.edit();
+                    edit.putString("email",email);
+                    edit.apply();
 
                     Intent intent=new Intent(SignupActivity.this,UploadimageActivity.class);
                     intent.putExtra("email",email);
