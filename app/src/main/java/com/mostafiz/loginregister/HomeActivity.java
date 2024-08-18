@@ -32,14 +32,26 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
         // Initialize SharedPreferences, Editor, and email inside onCreate()
         sharedPreferences = getSharedPreferences("information", MODE_PRIVATE);
         edit = sharedPreferences.edit();
         email = sharedPreferences.getString("email", "");
 
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                edit.putString("email","");
+                edit.apply();
+                finish();
+            }
+        });
+
 
         if (email.length() <= 0) {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
